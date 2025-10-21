@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zacarias João — Developer Portfolio</title>
+  <meta name="description" content="Zacarias João — Dart & Flutter developer. Minimal Afro-cultural portfolio with a modern tech touch." />
+  <meta name="keywords" content="Dart, Flutter, developer, portfolio, mobile apps, Portugal, Zacarias João" />
+  <meta name="author" content="Zacarias João" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>ZJ</text></svg>">
+  <!-- Google Fonts for better typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f0f10;
+      --card: #0f1720;
+      --muted: #9aa4ae;
+      --accent: #ff7a3d;
+      --accent-2: #ffd07a;
+      --glass: rgba(255, 255, 255, 0.03);
+      --maxw: 1100px;
+      --radius: 14px;
+      --mono: 'Segoe UI', Roboto, system-ui, -apple-system;
+      --poppins: 'Poppins', sans-serif;
+      --transition: all 0.3s ease;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: var(--mono);
+      background: linear-gradient(180deg, #071018 0%, #071418 60%);
+      color: #e6eef6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.5;
+      overflow-x: hidden;
+      transition: var(--transition); /* For dark/light mode */
+    }
+    .wrap {
+      max-width: var(--maxw);
+      margin: 36px auto;
+      padding: 28px;
+      animation: fadeIn 1s ease-in;
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      position: relative;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .logo {
+      width: 64px;
+      height: 64px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 700;
+      color: #0f0f10;
+      transition: var(--transition);
+    }
+    .logo:hover { transform: scale(1.05); }
+    h1 { font-size: 26px; margin: 0; font-family: var(--poppins); }
+    p.lead { margin: 6px 0 0; color: var(--muted); }
+
+    .nav-links {
+      margin-left: auto;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* Menu hambúrguer para mobile */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background: var(--accent);
+      margin: 3px 0;
+      transition: var(--transition);
+    }
+    .nav-menu {
+      display: flex;
+      gap: 10px;
+    }
+    .nav-menu.hidden { display: none; }
+
+    /* Hero */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 28px;
+      margin-top: 26px;
+    }
+    .hero-card {
+      background: var(--card);
+      padding: 24px;
+      border-radius: var(--radius);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+      transition: var(--transition);
+    }
+    .hero-card:hover { transform: translateY(-5px); }
+    .intro h2 { margin: 0; font-size: 20px; font-family: var(--poppins); }
+    .intro p { color: var(--muted); }
+    .cta { margin-top: 18px; display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn {
+      background: var(--accent);
+      color: #071018;
+      padding: 10px 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: var(--transition);
+    }
+    .btn:hover { background: var(--accent-2); transform: scale(1.05); }
+    .btn.ghost {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--accent-2);
+    }
+    .btn.ghost:hover { border-color: var(--accent); }
+
+    /* Skills */
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .skill {
+      background: var(--glass);
+      padding: 8px 12px;
+      border-radius: 10px;
+      color: var(--accent-2);
+      font-weight: 600;
+      transition: var(--transition);
+    }
+    .skill:hover { background: rgba(255, 255, 255, 0.1); }
+
+    /* Projects */
+    .projects {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 18px;
+    }
+    .proj {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+      padding: 18px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      transition: var(--transition);
+      animation: fadeIn 0.5s ease-in;
+    }
+    .proj:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .proj h3 { margin: 0 0 8px; }
+    .tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .tag {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 6px 8px;
+      border-radius: 8px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* Experience */
+    .experience { margin-top: 28px; }
+
+    /* About / Contact */
+    .about {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 18px;
+    }
+    .card {
+      background: var(--card);
+      padding: 18px;
+      border-radius: 12px;
+      transition: var(--transition);
+    }
+    .card:hover { box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8); }
+
+    /* Education */
+    .education { margin-top: 28px; }
+
+    /* Interests */
+    .interests { margin-top: 28px; }
+
+    /* Back to Top */
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--accent);
+      color: #071018;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 20px;
+      cursor: pointer;
+      display: none;
+      transition: var(--transition);
+    }
+    .back-to-top:hover { background: var(--accent-2); }
+
+    footer {
+      margin-top: 30px;
+      color: var(--muted);
+      font-size: 14px;
+      text-align: center;
+      padding: 20px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    /* Afro pattern */
+    .afro-pattern {
+      height: 8px;
+      background: linear-gradient(90deg, var(--accent) 0%, transparent 50%, var(--accent-2) 100%);
+      border-radius: 6px;
+      margin: 14px 0;
+    }
+
+    /* Dark/Light Mode Toggle */
+    .theme-toggle {
+      background: var(--glass);
+      border: none;
+      color: var(--accent-2);
+      padding: 8px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .theme-toggle:hover { background: rgba(255, 255, 255, 0.1); }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .projects { grid-template-columns: 1fr; }
+      .about { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .nav-menu { flex-direction: column; position: absolute; top: 100%; right: 0; background: var(--card); padding: 10px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+      .nav-menu.hidden { display: none; }
+      .wrap { padding: 20px; margin: 20px auto; }
+      .hero-card { padding: 18px; }
+      .btn { padding: 8px 12px; font-size: 14px; }
+    }
+    @media (max-width: 600px) {
+      h1 { font-size: 22px; }
+      .logo { width: 50px; height: 50px; }
+      .skills { justify-content: center; }
+      .cta { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <img src="your-photo.jpg" alt="Zacarias João" class="profile-pic" style="width:64px;height:64px;border-radius:12px;object-fit:cover;">
+        <div>
+          <h1>Zacarias João</h1>
+          <p class="lead">Dart & Flutter developer — Minimalist • Afro‑cultural • Tech</p>
+        </div>
+      </div>
+      <div class="hamburger" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div class="nav-links">
+        <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+        <div class="nav-menu hidden" id="navMenu">
+          <a href="#projects">Projects</a>
+          <a href="#experience">Experience</a>
+          <a href="#education">Education</a>
+          <a href="#contact">Contact</a>
+          <a href="your-resume.pdf" download>Download CV</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="hero">
+      <div class="intro hero-card">
+        <h2>Hi — I'm Zacarias</h2>
+        <p>I build clean mobile apps and experimental web tools using Dart & Flutter. I like simple interfaces with cultural expression and practical code.</p>
+
+        <div class="afro-pattern"></div>
+
+        <div class="skills">
+          <div class="skill">Dart: Advanced</div>
+          <div class="skill">Flutter: Advanced</div>
+          <div class="skill">JavaScript: Intermediate</div>
+          <div class="skill">Git & GitHub: Advanced</div>
+          <div class="skill">UI/UX basics: Intermediate</div>
+          <div class="skill">Python (Tkinter, Automation): Intermediate</div>
+          <div class="skill">C (Data Structures, Logic): Intermediate</div>
+          <div class="skill">Networking & Linux: Basic</div>
+        </div>
+
+        <div class="cta">
+          <a class="btn" href="#projects">See projects</a>
+          <a class="btn" href="#contact">Hire Me</a>
+          <a class="btn ghost" href="https://github.com/zacarias-joao" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+      <aside class="hero-card">
+        <h3>Contact</h3>
+        <p>Reach out for freelance work or collaboration.</p>
+        <div>
+          <strong>Email</strong>
+          <div>zacarias@example.com</div>
+        </div>
+        <div style="margin-top:10px">
+          <strong>Location</strong>
+          <div>Portugal, Viseu</div>
+        </div>
+        <div class="cta" style="margin-top:14px">
+          <a class="btn" href="https://github.com/zacarias-joao" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn ghost" href="#contact">Contact form</a>
+        </div>
+      </aside>
+    </div>
+
+    <section id="projects">
+      <h2>Featured Projects</h2>
+      <p>Selected works showcasing Dart, Flutter, Python, and C skills.</p>
+
+      <div class="projects">
+        <article class="proj">
+          <h3>Flutter Task Manager</h3>
+          <p>A mobile app for task tracking with self-care reminders, built with Flutter and Dart. Integrates local storage and simple UI animations.</p>
+          <div class="tags">
+            <div class="tag">Dart</div>
+            <div class="tag">Flutter</div>
+            <div class="tag">Mobile</div>
+          </div>
+          <a class="btn" href="https://github.com/zacarias-joao/flutter-task-manager" target="_blank" rel="noopener">Source</a>
+        </article>
+
+        <article class="proj">
+          <h3>Covid‑19 Global Tracker</h3>
+          <p>Data visualization notebook with interactive filters, charts and PDF export. Built while learning data handling and charting in Python.</p>
+          <div class="tags">
+            <div class="tag">Python</div>
+            <div class="tag">Data viz</div>
+            <div class="tag">Notebook</div>
+          </div>
+          <a class="btn" href="https://github.com/zacarias-joao/covid19-global-tracker" target="_blank" rel="noopener">Source</a>
+        </article>
+
+        <article class="proj">
+          <h3>C Network Scanner</h3>
+          <p>A command-line tool in C for basic network scanning and vulnerability checks, using sockets and data structures for efficiency.</p>
+          <div class="tags">
+            <div class="tag">C</div>
+            <div class="tag">Networking</div>
+            <div class="tag">Linux</div>
+          </div>
+          <a class="btn" href="https://github.com/zacarias-joao/c-network-scanner" target="_blank" rel="noopener">Source</a>
+        </article>
+
+        <article class="proj">
+          <h3>JavaScript Web Tool</h3>
+          <p>A simple web utility for automation tasks, built with vanilla JavaScript. Includes UI basics and responsive design.</p>
+          <div class="tags">
+            <div class="tag">JavaScript</div>
+            <div class="tag">Web</div>
+            <div class="tag">UI/UX</div>
+          </div>
+          <a class="btn" href="https://github.com/zacarias-joao/js-web-tool" target="_blank" rel="noopener">Source</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="experience">
+      <div class="card">
+        <h3>Experience</h3>
+        <ul>
+          <li><strong>Freelance Flutter Developer</strong> (2023-Present) - Built mobile apps for local clients, focusing on clean UI and Dart logic.</li>
+          <li><strong>
